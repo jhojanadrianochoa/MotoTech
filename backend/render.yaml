@@ -1,0 +1,19 @@
+# render.yaml — Configuración de despliegue en Render.com
+# Sube este archivo en la raíz del repo de tu backend
+
+services:
+  - type: web
+    name: mototech-api
+    env: node
+    region: oregon          # o "frankfurt" si prefieres Europa
+    plan: free              # plan gratuito (puede dormir tras 15min sin uso)
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false         # lo ingresas manualmente en el dashboard de Render
+      - key: ALLOWED_ORIGINS
+        sync: false         # p.ej: https://tu-app.vercel.app,https://tu-app.netlify.app
